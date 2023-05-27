@@ -23,9 +23,9 @@ I developed Jondo Web Scraper to automate the process of finding specific but re
  - [x] Able to organize information properly into CSV file
  - [x] Basic web scraper from a single file
  - [x] Scraper class for future project expansion
- - [ ] Jondo Web Scraper based on Scraper Class file
- - [ ] Interface for Windows application of Jondo Web Scraper
- - [ ] Removes functionality of automatic CSV download
+ - [x] Jondo Web Scraper based on Scraper Class file
+ - [x] Interface for Windows application of Jondo Web Scraper
+ - [ ] Remove automatic CSV download and implement download request
  - [ ] Downloadable version of Jondo Web Scraper along with all dependencies
  - [ ] Increase functionality of Scraper Class
  - [ ] Expand to create other web scrapers per requests
