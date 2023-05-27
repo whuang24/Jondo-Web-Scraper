@@ -8,7 +8,8 @@ import unicodedata
 
 from selenium import webdriver
 
-#Change according to user account
+#Input fields
+#Change fields according to user account
 username = 'VincentK'
 password = 'Nwinc17667!'
 
@@ -25,22 +26,25 @@ url = 'https://jondohd.com/zencp/rollDetailsView?id='
 def sleeping():
     time.sleep(30)
 
-
-
-#Access the geckodrier folder in local device
+#Access the geckodrier folder in local device, change the location according to local device
 PATH = "D:\Programming\WebScraper\Scraper 3.3\geckodriver.exe"
 
+
+# Initializes webdriver using GeckoDriver
 driver = webdriver.Firefox(executable_path=PATH)
 driver.get('https://jondohd.com/auth/0')
 
-#Begins logging into website
+# Begins automated login to website
 driver.find_element(By.NAME, 'userName').send_keys(username)
 driver.find_element(By.NAME, 'password').send_keys(password)
 sleeping()
 
 
-#Begins the scraping process
-#MODIFIES: [accesses URL]/[creates fields for spreadsheet]/[collects data from specified rolls]
+# Begins the scraping process
+# NAME: scrape
+# INPUT: url_link (list of roll ids' corresponding URL)
+# MODIFIES: [accesses URL]/[creates fields for spreadsheet]/[collects data from specified rolls]
+# EFFECT: initializes the driver and begins scraping each one of the roll ids
 def scrape(url_link):
     driver.get(url_link)
     response = driver.page_source
@@ -60,7 +64,8 @@ def scrape(url_link):
         if link not in targets:
             targets.append(link)
 
-    # MODIFIES: accessed individual items to retrieve data from them accordingly
+    # MODIFIES: [Output CSV file]/ ['orderIds' set]
+    # EFFECT: accesses each individual roll's printing image to retrieve data from them accordingly
     def find_info():
         for link in targets:
             OrderId = link
@@ -120,6 +125,7 @@ def scrape(url_link):
 
                 print(strings)
 
+                # Writing all data into CSV by rows
                 if ImageID in targeted_items:
                     if OrderId in orderIDs:
                         csv_writer.writerow([None, ImageID, PONum, ordered_date, shipped_date, Title, OrderId, width, height, new_IC, tracking, canvas, assembly, attribute, placed_by, customer, None, None, None, None])
@@ -127,9 +133,8 @@ def scrape(url_link):
                         csv_writer.writerow([None, ImageID, PONum, ordered_date, shipped_date, Title, OrderId, width, height, new_IC, tracking, canvas, assembly, attribute, placed_by, customer, sub_total, shipping_price, shipping_cost, net_shipping])
                         orderIDs.add(OrderId)
 
-    # MODIFIES: New CSV file
-    # EFFECT: Initializes a CSV file and adds every item within visited to the file as the indicated organization
-
+    # MODIFIES: [Output CSV file]
+    # EFFECT: Initializes a CSV file and adds every item within "visited" list to the file as the indicated organization
     if os.path.isfile('./' + file_name):
         with open(file_name, 'a', newline = '') as csv_file:
             csv_writer = writer(csv_file)
