@@ -35,5 +35,5 @@ I developed Jondo Web Scraper to automate the process of finding specific but re
 ## Dependencies
 
  - [GeckoDriver] (https://github.com/mozilla/geckodriver/releases)
- - [Python bs4] (https://pypi.org/project/bs4/)
+ - [Python BeautifulSoup] (https://pypi.org/project/bs4/)
  - [Selenium WebDriver] (https://www.selenium.dev/documentation/webdriver/)
